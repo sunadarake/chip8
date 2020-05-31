@@ -27,14 +27,7 @@
 
     <canvas></canvas>
 
-    <dl>
-        <dt>Program</dt>
-        <dd id="loaded-program">None</dd>
-        <dt><abbr title="Frames Per Second">FPS</abbr></dt>
-        <dd id="fps">0</dd>
-    </dl>
-
-    <p>Chip-8 uses a hexadecimal input. Use the keys below, or use a gamepad if enabled.</p>
+    <p><b>Q</b>=Shot <b>W</b>=move left <b>4</b>=move right</p>
 
     <script src="Renderer.js"></script>
     <script src="CPU.js"></script>
@@ -61,7 +54,6 @@
                     ch.reset();
                     ch.loadProgram(new Uint8Array(xhr.response));
                     ch.start();
-                    programLoaded.textContent = "Game now";
                 };
 
                 xhr.send();
