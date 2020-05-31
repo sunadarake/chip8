@@ -1,0 +1,89 @@
+body {
+            font-family: sans-serif;
+			font-size: 80%;
+			width: 500px;
+			margin: 30px auto;
+}
+
+        h1 {
+            font-family: "Press Start 2P", sans-serif;
+        }
+
+        canvas {
+			display: block;
+            background: #000;
+			margin: 5px 0;
+        }
+		
+		#forms {
+			display: inline;
+			padding: 10px 0;
+		}
+		
+		form {
+			margin-bottom: 10px;
+		}
+		
+		form,
+		fieldset {
+			display: inline;
+		}
+		
+		fieldset {
+			border: none;
+			padding: 0;
+		}
+		
+		label,
+		dl dt {
+			font-weight: bold;
+		}
+		
+		label::after,
+		dl dt::after {
+			content: ":";
+		}
+		
+		#color {
+			margin: 0 10px -8px 0;
+		}
+		
+		dl {
+			overflow: hidden;
+		}
+		
+		dl dt {
+			width: 40px;
+			float: left;
+			clear: left;
+		}
+		
+		dl dd {
+			float: left;
+			margin-bottom: 6px;
+		}
+		
+		p,
+		p a {
+			color: #444;
+		}
+		
+		ol {
+			width: 120px;
+			list-style: none;
+			padding: 0;
+		}
+		
+		ol li {
+			display: inline-block;
+			margin: 0 8px 8px 0;
+
+		}
+		
+		ol li kbd {
+			padding: 2px 6px;
+			background: #efefef;
+			border-radius: 3px;
+			font-size: 12px;
+			box-shadow: 1px 1px 1px #ddd;
+		}

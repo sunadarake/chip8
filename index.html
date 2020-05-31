@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chip8 Emulator</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <h1>Chip-8 Emulator</h1>
+
+    <section id="forms">
+        <form action="">
+            <fieldset>
+                <label for="program">Program</label>
+                <button id="program_start">Start!!</button>
+                <!-- <select id="program">
+                    <option></option>
+                </select> -->
+            </fieldset>
+        </form>
+    </section>
+
+    <canvas></canvas>
+
+    <dl>
+        <dt>Program</dt>
+        <dd id="loaded-program">None</dd>
+        <dt><abbr title="Frames Per Second">FPS</abbr></dt>
+        <dd id="fps">0</dd>
+    </dl>
+
+    <p>Chip-8 uses a hexadecimal input. Use the keys below, or use a gamepad if enabled.</p>
+
+    <script src="Renderer.js"></script>
+    <script src="CPU.js"></script>
+    <script>
+        (function () {
+            var CELL_SIZE = 8;
+
+            var canvas = document.querySelector("canvas");
+
+            var ch = new CPU();
+            var render = new Renderer(canvas, ch.getDisplayWidth(), ch.getDisplayHeight(), CELL_SIZE);
+
+            ch.setRenderer(render);
+
+            var programLoaded = document.querySelector("#loaded-program");
+            var button = document.getElementById("program_start");
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "INVADERS", true);
+                xhr.responseType = "arraybuffer";
+                xhr.onload = function () {
+                    ch.stop();
+                    ch.reset();
+                    ch.loadProgram(new Uint8Array(xhr.response));
+                    ch.start();
+                    programLoaded.textContent = "Game now";
+                };
+
+                xhr.send();
+            });
+
+            var translateKeys = {
+                49: 0x1,  // 1
+                50: 0x2,  // 2
+                51: 0x3,  // 3
+                52: 0x4,  // 4
+                81: 0x5,  // Q
+                87: 0x6,  // W
+                69: 0x7,  // E
+                82: 0x8,  // R
+                65: 0x9,  // A
+                83: 0xA,  // S
+                68: 0xB,  // D
+                70: 0xC,  // F
+                90: 0xD,  // Z
+                88: 0xE,  // X
+                67: 0xF,  // C
+                86: 0x10  // V
+            };
+
+            document.addEventListener("keydown", function (event) {
+                ch.setKey(translateKeys[event.keyCode]);
+            });
+
+            document.addEventListener("keyup", function (event) {
+                ch.unsetKey(translateKeys[event.keyCode]);
+            });
+        })();
+    </script>
+</body>
+
+</html>
